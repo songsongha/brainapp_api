@@ -2,9 +2,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
-
 const app = express();
+const cors = require('cors');
+
 app.use(bodyParser.json());
+app.use(cors());
 
 const database = {
 	users:[
@@ -33,6 +35,13 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
+	// bcrypt.compare(hash, function(err, res) {
+	// 	//res == true
+	// });
+	// bcrypt.compare("", hash, function(err, res) {
+	// 	// res = false
+	// });
+
 	if(req.body.email === database.users[0].email &&
 		req.body.password === database.users[0].password) {
 		res.json('success');
@@ -89,8 +98,8 @@ app.post('/image', (req, res) =>{
 		}
 })
 
-app.listen(3000, ()=> {
-	console.log('app is running on port 3000');
+app.listen(3001, ()=> {
+	console.log('app is running on port 3001');
 })
 
 
