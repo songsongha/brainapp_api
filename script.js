@@ -4,6 +4,19 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const app = express();
 const cors = require('cors');
+const knex = require ('knex'); //for connecting to the db
+
+const pg = knex ({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1', //same as local host
+    user : process.env.DB_USERNAME,
+    password : process.env.DB_PASSWORD,
+    database : 'brainapp'
+  }
+});
+
+console.log(pg.select('*').from('users'));
 
 app.use(bodyParser.json());
 app.use(cors());
