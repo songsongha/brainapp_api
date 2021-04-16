@@ -1,9 +1,9 @@
 
 const express = require('express');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); // for handling JSON
 const bcrypt = require('bcrypt-nodejs');
 const app = express();
-const cors = require('cors');
+const cors = require('cors'); // allows us to connect to the front end, using fetch
 const knex = require ('knex'); //for connecting to the db
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -25,30 +25,8 @@ const db = knex ({
 app.use(bodyParser.json());
 app.use(cors());
 
-const database = {
-	users:[
-		{
-			id: '123',
-			name: 'John',
-			email: 'john@email.com',
-			password: 'cookies',
-			entries: '0',
-			joined: new Date()
-		},
-		{
-			id: '124',
-			name: 'Sally',
-			email: 'sally@email.com',
-			password: 'bananas',
-			entries: '0',
-			joined: new Date()
-		}
-
-	]
-}
-
 app.get('/', (req, res) => {
-	res.send(database.users);
+// do we need to have anything in here?
 })
 
 app.post('/signin', (req,res) => { signin.handleSignin(req, res, db, bcrypt)})
