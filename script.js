@@ -14,10 +14,8 @@ require('dotenv').config();
 const db = knex ({
   client: 'pg',
   connection: {
-    host : '127.0.0.1', //same as local host
-    user : process.env.DB_USERNAME,
-    password : process.env.DB_PASSWORD,
-    database : 'brainapp'
+    connectionString : process.env.DATABASE_URL, //same as local host
+    ssl: true
   }
 });
 
